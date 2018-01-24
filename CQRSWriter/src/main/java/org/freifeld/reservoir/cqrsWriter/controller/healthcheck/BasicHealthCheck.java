@@ -1,4 +1,4 @@
-package org.freifeld.eventSourcing.controller.healthcheck;
+package org.freifeld.reservoir.cqrsWriter.controller.healthcheck;
 
 import com.codahale.metrics.health.HealthCheck;
 

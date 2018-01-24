@@ -1,4 +1,4 @@
-package org.freifeld.eventSourcing;
+package org.freifeld.reservoir.cqrsWriter;
 
 import io.dropwizard.Configuration;
 

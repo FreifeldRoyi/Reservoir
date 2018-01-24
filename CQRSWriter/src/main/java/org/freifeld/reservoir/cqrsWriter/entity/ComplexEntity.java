@@ -1,4 +1,4 @@
-package org.freifeld.eventSourcing.entity;
+package org.freifeld.reservoir.cqrsWriter.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

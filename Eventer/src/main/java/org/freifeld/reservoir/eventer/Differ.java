@@ -1,4 +1,4 @@
-package org.freifeld.eventSourcing.eventer;
+package org.freifeld.reservoir.eventer;
 
 /**
  * @author royif

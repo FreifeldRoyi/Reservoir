@@ -1,6 +1,6 @@
-package org.freifeld.eventSourcing.boundary;
+package org.freifeld.reservoir.cqrsWriter.boundary;
 
-import org.freifeld.eventSourcing.entity.ComplexEntity;
+import org.freifeld.reservoir.cqrsWriter.entity.ComplexEntity;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

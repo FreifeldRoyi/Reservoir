@@ -1,9 +1,9 @@
-package org.freifeld.eventSourcing;
+package org.freifeld.reservoir.cqrsWriter;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
-import org.freifeld.eventSourcing.boundary.ComplexEntityWriteResource;
-import org.freifeld.eventSourcing.controller.healthcheck.BasicHealthCheck;
+import org.freifeld.reservoir.cqrsWriter.boundary.ComplexEntityWriteResource;
+import org.freifeld.reservoir.cqrsWriter.controller.healthcheck.BasicHealthCheck;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
