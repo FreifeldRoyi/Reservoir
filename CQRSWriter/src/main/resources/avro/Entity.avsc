@@ -1,0 +1,28 @@
+{
+  "namespace": "session.avro",
+  "type": "record",
+  "name": "Entity",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "number",
+      "type": "long"
+    },
+    {
+      "name": "eventType",
+      "type": {
+        "type": "enum",
+        "name": "EventType",
+        "namespace": "session.avro",
+        "symbols": [
+          "CREATE",
+          "UPDATE",
+          "DELETE"
+        ]
+      }
+    }
+  ]
+}
