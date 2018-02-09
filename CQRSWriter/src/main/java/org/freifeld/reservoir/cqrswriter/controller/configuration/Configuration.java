@@ -41,6 +41,7 @@ public class Configuration
 	}
 
 	@Produces
+	@ConfigVariable
 	public Properties getProperties(InjectionPoint ip)
 	{
 		final Properties toReturn = new Properties();

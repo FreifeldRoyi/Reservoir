@@ -8,6 +8,8 @@
     <artifactId>CQRSWriter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
+    <packaging>war</packaging>
+
     <repositories>
         <repository>
             <id>confluent</id>
@@ -26,29 +28,41 @@
         <version.kafka>1.0.0</version.kafka>
         <version.avro>1.8.2</version.avro>
         <version.confluent>1.0</version.confluent>
+
+        <version.plugins.apache.war>3.2.0</version.plugins.apache.war>
     </properties>
 
     <build>
+        <finalName>CQRSWriter</finalName>
         <plugins>
             <plugin>
-                <groupId>org.apache.avro</groupId>
-                <artifactId>avro-maven-plugin</artifactId>
-                <version>${version.avro}</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>schema</goal>
-                            <goal>protocol</goal>
-                            <goal>idl-protocol</goal>
-                        </goals>
-                        <configuration>
-                            <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
-                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${version.plugins.apache.war}</version>
+                <configuration>
+                    <outputDirectory>/home/royif/Workspace/dev-tools/OpenLiberty/usr/servers/CQRSWriter/dropins</outputDirectory>
+                </configuration>
             </plugin>
+
+            <!--<plugin>-->
+                <!--<groupId>org.apache.avro</groupId>-->
+                <!--<artifactId>avro-maven-plugin</artifactId>-->
+                <!--<version>${version.avro}</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>generate-sources</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>schema</goal>-->
+                            <!--<goal>protocol</goal>-->
+                            <!--<goal>idl-protocol</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>-->
+                            <!--<outputDirectory>${project.basedir}/src/main/java/</outputDirectory>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 

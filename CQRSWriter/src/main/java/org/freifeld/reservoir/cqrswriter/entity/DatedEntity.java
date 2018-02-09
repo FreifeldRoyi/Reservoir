@@ -6,7 +6,21 @@ import java.time.ZonedDateTime;
  * @author royif
  * @since 02/02/18.
  */
-public interface DatedEntity
+public class DatedEntity
 {
-	ZonedDateTime getDate();
+	private ZonedDateTime dateTime;
+
+	public DatedEntity()
+	{
+	}
+
+	public DatedEntity(ZonedDateTime dateTime)
+	{
+		this.dateTime = dateTime;
+	}
+
+	public ZonedDateTime getDateTime()
+	{
+		return this.dateTime;
+	}
 }

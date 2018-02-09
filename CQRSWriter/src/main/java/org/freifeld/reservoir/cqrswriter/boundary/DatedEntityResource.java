@@ -1,6 +1,6 @@
 package org.freifeld.reservoir.cqrswriter.boundary;
 
-import org.freifeld.reservoir.cqrswriter.entity.VersionedEntity;
+import org.freifeld.reservoir.cqrswriter.entity.DatedEntity;
 
 import javax.annotation.Resource;
 import javax.enterprise.concurrent.ManagedExecutorService;
@@ -13,33 +13,32 @@ import java.util.concurrent.CompletableFuture;
 
 /**
  * @author royif
- * @since 12/01/18.
+ * @since 09/02/18.
  */
-@Path("versionedEntities")
+@Path("datedEntities")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class VersionEntityResource
+public class DatedEntityResource
 {
 	@Resource
 	private ManagedExecutorService mes;
 
 	@POST
-	public void createEntity(VersionedEntity versionedEntity, @Suspended AsyncResponse response)
+	public void createEntity(DatedEntity datedEntity, @Suspended AsyncResponse response)
 	{
-		System.out.println("Version is: " + versionedEntity.getVersion());
-		CompletableFuture.supplyAsync(() -> Response.ok(versionedEntity).build(), this.mes).thenAccept(response::resume);
+		CompletableFuture.supplyAsync(() -> Response.ok(datedEntity).build(), this.mes).thenAccept(response::resume);
 		//this.outboundManager.fire(complexEntity);
 	}
 
 	@PUT
-	public void updateEntity(VersionedEntity versionedEntity, @Suspended AsyncResponse response)
+	public void updateEntity(DatedEntity datedEntity, @Suspended AsyncResponse response)
 	{
 		//this.outboundManager.fire(complexEntity);
 	}
 
 	@DELETE
 	@Path("{id}")
-	public void deleteEntity(@PathParam("id") String id, VersionedEntity versionedEntity, @Suspended AsyncResponse response)
+	public void deleteEntity(@PathParam("id") String id, DatedEntity datedEntity, @Suspended AsyncResponse response)
 	{
 		//this.outboundManager.fire(complexEntity);
 	}

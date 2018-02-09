@@ -29,13 +29,13 @@ public class ManagedKafka
 	private void init()
 	{
 		this.topic = this.props.getProperty("topics.raw");
-		this.kafkaProducer = new KafkaProducer(this.props);
+		//this.kafkaProducer = new KafkaProducer(this.props);
 	}
 
 	@PreDestroy
 	public void stop()
 	{
-		this.kafkaProducer.close();
+		//this.kafkaProducer.close();
 	}
 
 	@Produces
