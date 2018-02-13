@@ -1,9 +1,12 @@
 package org.freifeld.reservoir.cqrswriter.boundary;
 
+import org.apache.kafka.clients.producer.KafkaProducer;
 import org.freifeld.reservoir.cqrswriter.entity.DatedEntity;
 
 import javax.annotation.Resource;
 import javax.enterprise.concurrent.ManagedExecutorService;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
@@ -23,11 +26,13 @@ public class DatedEntityResource
 	@Resource
 	private ManagedExecutorService mes;
 
+	@Inject
+	private Event<DatedEntity> datedEntityEvent;
+
 	@POST
 	public void createEntity(DatedEntity datedEntity, @Suspended AsyncResponse response)
 	{
 		CompletableFuture.supplyAsync(() -> Response.ok(datedEntity).build(), this.mes).thenAccept(response::resume);
-		//this.outboundManager.fire(complexEntity);
 	}
 
 	@PUT

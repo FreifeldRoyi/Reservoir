@@ -1,12 +1,13 @@
 package org.freifeld.reservoir.cqrswriter.controller;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.freifeld.reservoir.cqrswriter.controller.configuration.ConfigVariable;
+import org.freifeld.reservoir.cqrswriter.entity.ReservoirEvent;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import java.util.Properties;
 
@@ -21,7 +22,7 @@ public class ManagedKafka
 	@ConfigVariable("META-INF/kafka.properties")
 	private Properties props;
 
-	private KafkaProducer kafkaProducer;
+	private KafkaProducer<String, ReservoirEvent> kafkaProducer;
 
 	private String topic;
 
@@ -29,18 +30,22 @@ public class ManagedKafka
 	private void init()
 	{
 		this.topic = this.props.getProperty("topics.raw");
-		//this.kafkaProducer = new KafkaProducer(this.props);
+		this.kafkaProducer = new KafkaProducer<>(this.props);
+	}
+
+	public void publish(ReservoirEvent event)
+	{
+		ProducerRecord<String, ReservoirEvent> record = new ProducerRecord<>(this.topic, event);
+//		try
+//		{
+////			this.kafkaProducer.
+//		}
 	}
 
 	@PreDestroy
-	public void stop()
+	private void stop()
 	{
-		//this.kafkaProducer.close();
+		this.kafkaProducer.close();
 	}
 
-	@Produces
-	public KafkaProducer kafkaProducerExposer()
-	{
-		return this.kafkaProducer;
-	}
 }
