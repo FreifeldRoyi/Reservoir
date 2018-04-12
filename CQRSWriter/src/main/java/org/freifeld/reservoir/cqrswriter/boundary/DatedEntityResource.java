@@ -1,50 +1,50 @@
 package org.freifeld.reservoir.cqrswriter.boundary;
 
-import org.apache.kafka.clients.producer.KafkaProducer;
+import org.freifeld.reservoir.cqrswriter.controller.ReservoirEventProducer;
 import org.freifeld.reservoir.cqrswriter.entity.DatedEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.annotation.Resource;
-import javax.enterprise.concurrent.ManagedExecutorService;
-import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.container.AsyncResponse;
-import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * @author royif
  * @since 09/02/18.
  */
-@Path("datedEntities")
+@Path("/datedEntities")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class DatedEntityResource
 {
-	@Resource
-	private ManagedExecutorService mes;
+	private static final Logger LOGGER = LoggerFactory.getLogger(DatedEntityResource.class);
 
 	@Inject
-	private Event<DatedEntity> datedEntityEvent;
+	private ReservoirEventProducer producer;
 
 	@POST
-	public void createEntity(DatedEntity datedEntity, @Suspended AsyncResponse response)
+	public Response createEntity(DatedEntity datedEntity)
 	{
-		CompletableFuture.supplyAsync(() -> Response.ok(datedEntity).build(), this.mes).thenAccept(response::resume);
+		//TODO
+		LOGGER.info("RX {}", datedEntity);
+		//this.producer.publish(datedEntity);
+		return Response.ok(datedEntity).build();
 	}
 
 	@PUT
-	public void updateEntity(DatedEntity datedEntity, @Suspended AsyncResponse response)
+	public Response updateEntity(DatedEntity datedEntity)
 	{
-		//this.outboundManager.fire(complexEntity);
+		//TODO
+		return Response.ok(datedEntity).build();
 	}
 
 	@DELETE
 	@Path("{id}")
-	public void deleteEntity(@PathParam("id") String id, DatedEntity datedEntity, @Suspended AsyncResponse response)
+	public Response deleteEntity(@PathParam("id") String id, DatedEntity datedEntity)
 	{
-		//this.outboundManager.fire(complexEntity);
+		//TODO
+		return Response.ok(datedEntity).build();
 	}
 }

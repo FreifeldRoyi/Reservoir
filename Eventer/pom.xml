@@ -11,12 +11,20 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.9</maven.compiler.source>
+        <maven.compiler.target>1.9</maven.compiler.target>
 
-
-        <version.dropwizard>1.2.2</version.dropwizard>
         <version.logging.slf4j>1.7.25</version.logging.slf4j>
         <version.logging.log4j>2.9.1</version.logging.log4j>
+
+        <version.javers>3.8.4</version.javers>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.javers</groupId>
+            <artifactId>javers-core</artifactId>
+            <version>${version.javers}</version>
+        </dependency>
+    </dependencies>
 </project>

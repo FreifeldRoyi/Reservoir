@@ -1,6 +1,5 @@
 package org.freifeld.reservoir.cqrswriter.entity;
 
-import javax.json.bind.annotation.JsonbProperty;
 import java.time.Instant;
 
 /**
@@ -9,7 +8,6 @@ import java.time.Instant;
  */
 public abstract class ReservoirEvent
 {
-	@JsonbProperty
 	private final Instant instant;
 
 	protected ReservoirEvent()

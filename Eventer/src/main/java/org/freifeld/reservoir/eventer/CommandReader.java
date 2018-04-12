@@ -2,8 +2,8 @@ package org.freifeld.reservoir.eventer;
 
 /**
  * @author royif
- * @since 24/01/18.
+ * @since 16/03/18.
  */
-public class Differ
+public class CommandReader
 {
 }

@@ -1,46 +1,45 @@
 package org.freifeld.reservoir.cqrswriter.boundary;
 
+import org.eclipse.microprofile.metrics.annotation.Counted;
 import org.freifeld.reservoir.cqrswriter.entity.VersionedEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.annotation.Resource;
-import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.ws.rs.*;
-import javax.ws.rs.container.AsyncResponse;
-import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * @author royif
  * @since 12/01/18.
  */
-@Path("versionedEntities")
+@Path("/versionedEntities")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class VersionEntityResource
 {
-	@Resource
-	private ManagedExecutorService mes;
+	private static final Logger LOGGER = LoggerFactory.getLogger(VersionEntityResource.class);
 
 	@POST
-	public void createEntity(VersionedEntity versionedEntity, @Suspended AsyncResponse response)
+	public Response createEntity(VersionedEntity versionedEntity)
 	{
-		System.out.println("Version is: " + versionedEntity.getVersion());
-		CompletableFuture.supplyAsync(() -> Response.ok(versionedEntity).build(), this.mes).thenAccept(response::resume);
-		//this.outboundManager.fire(complexEntity);
+		//TODO
+		LOGGER.info("RX data {}", versionedEntity);
+		return Response.ok(versionedEntity).build();
 	}
 
 	@PUT
-	public void updateEntity(VersionedEntity versionedEntity, @Suspended AsyncResponse response)
+	public Response updateEntity(VersionedEntity versionedEntity)
 	{
-		//this.outboundManager.fire(complexEntity);
+		//TODO
+		return Response.ok(versionedEntity).build();
 	}
 
 	@DELETE
 	@Path("{id}")
-	public void deleteEntity(@PathParam("id") String id, VersionedEntity versionedEntity, @Suspended AsyncResponse response)
+	public Response deleteEntity(@PathParam("id") String id, VersionedEntity versionedEntity)
 	{
-		//this.outboundManager.fire(complexEntity);
+		//TODO
+		return Response.ok(versionedEntity).build();
 	}
 }

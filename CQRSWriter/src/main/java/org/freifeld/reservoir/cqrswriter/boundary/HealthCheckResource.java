@@ -1,45 +1,22 @@
 package org.freifeld.reservoir.cqrswriter.boundary;
 
-import org.freifeld.reservoir.cqrswriter.controller.healthcheck.BasicHealthCheck;
+import org.eclipse.microprofile.health.Health;
+import org.eclipse.microprofile.health.HealthCheck;
+import org.eclipse.microprofile.health.HealthCheckResponse;
 
-import javax.annotation.Resource;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.enterprise.concurrent.ManagedExecutorService;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.container.AsyncResponse;
-import javax.ws.rs.container.Suspended;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  * @author royif
- * @since 04/02/18.
+ * @since 30/03/18.
  */
-@Stateless
-@Path("healthCheck")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-public class HealthCheckResource
+@Health
+@ApplicationScoped
+public class HealthCheckResource implements HealthCheck
 {
-
-	@Resource
-	private ManagedExecutorService mes;
-
-	@EJB
-	private BasicHealthCheck basicHealthCheck;
-
-	@GET
-	public void serviceStatus(@Suspended AsyncResponse response)
+	@Override
+	public HealthCheckResponse call()
 	{
-		response.setTimeout(1, TimeUnit.SECONDS);
-
-		CompletableFuture.supplyAsync(() -> Response.ok(this.basicHealthCheck.check()).build(), this.mes).thenAccept(response::resume);
+		return HealthCheckResponse.named("PING").up().build();
 	}
-
 }
