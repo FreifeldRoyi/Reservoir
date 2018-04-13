@@ -17,10 +17,19 @@
         <version.logging.slf4j>1.7.25</version.logging.slf4j>
         <version.logging.log4j>2.9.1</version.logging.log4j>
 
-        <version.javers>3.8.4</version.javers>
+        <version.javers>3.9.0</version.javers>
+        <version.microprofile-api>1.3</version.microprofile-api>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.eclipse.microprofile</groupId>
+            <artifactId>microprofile</artifactId>
+            <version>${version.microprofile-api}</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.javers</groupId>
             <artifactId>javers-core</artifactId>
