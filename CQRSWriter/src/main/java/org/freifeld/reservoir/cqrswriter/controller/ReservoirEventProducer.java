@@ -5,7 +5,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.KafkaException;
 import org.apache.kafka.common.errors.ProducerFencedException;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.freifeld.reservoir.cqrswriter.entity.ReservoirEvent;
+import org.freifeld.reservoir.events.ReservoirEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

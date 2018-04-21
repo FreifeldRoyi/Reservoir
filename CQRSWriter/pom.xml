@@ -23,6 +23,10 @@
         <maven.compiler.source>1.9</maven.compiler.source>
         <maven.compiler.target>1.9</maven.compiler.target>
 
+        <!-- inter project dependencies -->
+        <version.reservoir.events>0.0.1-SNAPSHOT</version.reservoir.events>
+
+        <!-- 3rd party dependencies -->
         <version.microprofile-api>1.3</version.microprofile-api>
 
         <version.kafka>1.0.0</version.kafka>
@@ -35,88 +39,15 @@
         <version.logging.log4j>2.11.0</version.logging.log4j>
     </properties>
 
-    <build>
-        <finalName>CQRSWriter</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${version.plugins.apache.war}</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <!--<outputDirectory>/home/royif/Workspace/dev-tools/OpenLiberty 18.0.0.1/usr/servers/CQRSWriter/dropins</outputDirectory>-->
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>net.wasdev.wlp.maven.plugins</groupId>
-                <artifactId>liberty-maven-plugin</artifactId>
-                <version>2.0</version>
-                <configuration>
-                    <assemblyArtifact>
-                        <groupId>io.openliberty</groupId>
-                        <artifactId>openliberty-runtime</artifactId>
-                        <version>RELEASE</version>
-                        <type>zip</type>
-                    </assemblyArtifact>
-                    <configFile>src/main/config/server.xml</configFile>
-                    <packageFile>${project.build.directory}/${project.build.finalName}.${project.packaging}</packageFile>
-                    <include>usr</include>
-                    <bootstrapProperties>
-                        <default.http.port>8080</default.http.port>
-                        <default.https.port>9443</default.https.port>
-                    </bootstrapProperties>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>install-liberty</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>install-server</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>install-app</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>install-apps</goal>
-                        </goals>
-                        <configuration>
-                            <looseApplication>true</looseApplication>
-                            <stripVersion>true</stripVersion>
-                            <installAppPackages>project</installAppPackages>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>start-server</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>start-server</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>stop-server</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop-server</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>package-app</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>package-server</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>target/wlp-package</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencies>
+        <!-- inter project dependencies -->
+        <dependency>
+            <groupId>org.freifeld.reservoir</groupId>
+            <artifactId>Events</artifactId>
+            <version>${version.reservoir.events}</version>
+        </dependency>
+
+        <!-- 3rd party dependencies -->
         <dependency>
             <groupId>org.eclipse.microprofile</groupId>
             <artifactId>microprofile</artifactId>
@@ -158,4 +89,19 @@
             <version>${version.logging.log4j}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>CQRSWriter</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${version.plugins.apache.war}</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <!--<outputDirectory>/home/royif/Workspace/dev-tools/OpenLiberty 18.0.0.1/usr/servers/CQRSWriter/dropins</outputDirectory>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

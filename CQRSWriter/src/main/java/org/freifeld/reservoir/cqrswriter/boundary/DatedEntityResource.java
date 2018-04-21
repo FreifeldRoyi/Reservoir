@@ -1,11 +1,9 @@
 package org.freifeld.reservoir.cqrswriter.boundary;
 
-import org.freifeld.reservoir.cqrswriter.controller.ReservoirEventProducer;
-import org.freifeld.reservoir.cqrswriter.entity.DatedEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.freifeld.reservoir.events.DatedEntity;
 
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -21,8 +19,8 @@ public class DatedEntityResource
 {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DatedEntityResource.class);
 
-	@Inject
-	private ReservoirEventProducer producer;
+	//	@Inject
+	//	private ReservoirEventProducer producer;
 
 	@POST
 	public Response createEntity(DatedEntity datedEntity)

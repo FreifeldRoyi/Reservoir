@@ -1,4 +1,4 @@
-package org.freifeld.reservoir.cqrswriter.entity;
+package org.freifeld.reservoir.events;
 
 /**
  * @author royif

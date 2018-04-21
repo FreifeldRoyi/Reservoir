@@ -8,11 +8,11 @@ import java.util.concurrent.Flow;
  * @author royif
  * @since 16/03/18.
  */
-public class CommandReader implements Flow.Publisher<List<JsonObject>> {
+public class CommandReader implements Flow.Publisher<List<JsonObject>>
+{
+	@Override
+	public void subscribe(Flow.Subscriber<? super List<JsonObject>> subscriber)
+	{
 
-
-    @Override
-    public void subscribe(Flow.Subscriber<? super List<JsonObject>> subscriber) {
-
-    }
+	}
 }
