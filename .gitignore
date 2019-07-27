@@ -1,2 +1,14 @@
+# IntelliJ 
 .idea/
 *.iml
+
+#VSCode
+.vscode/
+*.classpath
+*.factorypath
+*.project
+.settings/
+bin/
+
+# Java
+target/
